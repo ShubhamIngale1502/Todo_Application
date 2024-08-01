@@ -5,7 +5,7 @@ Status = [('In Progress','In Progress'),('Completed','Completed'),('Cancel','Can
 class TodoForm(forms.ModelForm):
     class Meta:
         model = Todo_Task
-        fields = '__all__'
+        fields = ['task_name', 'task_description','task_deadline']
         
         widgets = {
             'task_name': forms.TextInput(attrs={
@@ -30,4 +30,12 @@ class TodoForm(forms.ModelForm):
 class StatusUpdateForm(forms.ModelForm):
     class Meta:
         model = Todo_Task
-        fields = ['task_status'] 
+        fields = ['task_name', 'task_description', 'task_status','task_deadline']
+
+class StatusForm(StatusUpdateForm):
+    def __init__(self, *args, **kwargs):
+        super(StatusForm, self).__init__(*args, **kwargs)
+        self.fields['task_name'].disabled = True
+        self.fields['task_description'].disabled = True
+        self.fields['task_deadline'].disabled = True
+        

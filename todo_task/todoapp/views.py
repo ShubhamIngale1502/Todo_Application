@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Todo_Task
-from .forms import TodoForm,StatusUpdateForm
+from .forms import TodoForm, StatusForm
 
 def create(request):
     template_name = "todoapp/insert.html"
@@ -22,9 +22,9 @@ def show_task(request):
 def update_task(request, pk):
     template_name = "todoapp/insert.html"
     obj = Todo_Task.objects.get(pk=pk)
-    form = StatusUpdateForm(instance=obj)  
+    form = StatusForm(instance=obj)  
     if request.method == 'POST':
-        form = StatusUpdateForm(request.POST, instance=obj)
+        form = StatusForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
             return redirect('list')

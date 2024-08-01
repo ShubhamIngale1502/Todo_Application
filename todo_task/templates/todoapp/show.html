@@ -25,7 +25,11 @@
             <td>{{td.task_status}}</td>
             <td>{{td.task_deadline}}</td>
             <td>{{td.task_created_date}}</td>
+            {% if td.task_status == 'Completed' %}
             <td>{{td.task_completed}}</td>
+            {%else%}
+            <td>Not Completed</td>
+            {%endif%}
             <td>
               {% if td.task_status != 'Completed' %}
                 <a href="{% url 'update_task' td.pk %}" class="btn btn-outline-warning">Update</a>
